@@ -1,4 +1,6 @@
 // UCI interface for PyChess C++.
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
 #include "board.hpp"
 #include "search.hpp"
 #include "eval.hpp"
@@ -36,6 +38,9 @@ static Move uci_to_move(const Board& b, const std::string& uci) {
 }
 
 int main() {
+    // Ensure proper UTF-8 handling for Windows console
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
     init_attack_tables();
     Board board = Board::from_fen(
         "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
